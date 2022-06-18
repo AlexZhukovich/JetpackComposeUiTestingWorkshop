@@ -52,7 +52,7 @@ fun SettingsScreen(
                     icon = R.drawable.ic_android,
                     onClick = {
                         onDocs(
-                            "https://github.com/AlexZhukovich/JetpackComposeUiTestingWorkshop/blob/main/README.md"
+                            "https://github.com/AlexZhukovich/JetpackComposeUiTestingWorkshop/blob/main/mood-tracker-android/README.md#mood-tracker-android-app"
                         )
                     }
                 )
@@ -62,7 +62,7 @@ fun SettingsScreen(
                     icon = R.drawable.ic_cloud_done,
                     onClick = {
                         onDocs(
-                            "https://github.com/AlexZhukovich/JetpackComposeUiTestingWorkshop/blob/main/README.md"
+                            "https://github.com/AlexZhukovich/JetpackComposeUiTestingWorkshop/blob/main/mood-tracker-api/README.md#mood-tracker-api"
                         )
                     }
                 )
