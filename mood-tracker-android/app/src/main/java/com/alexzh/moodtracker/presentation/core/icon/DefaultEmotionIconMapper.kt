@@ -1,6 +1,7 @@
 package com.alexzh.moodtracker.presentation.core.icon
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import com.alexzh.moodtracker.R
 import com.alexzh.moodtracker.data.model.Emotion
 import com.alexzh.moodtracker.presentation.core.EmotionItem
@@ -10,18 +11,22 @@ class DefaultEmotionIconMapper : EmotionIconMapper {
 
     override fun mapToEmotionItem(
         emotion: Emotion,
+        @StringRes contentDescription: Int,
         @DrawableRes fallbackIcon: Int
     ) = EmotionItem(
         emotionId = emotion.id,
-        iconRes = mapIcon(emotion.icon, fallbackIcon)
+        iconRes = mapIcon(emotion.icon, fallbackIcon),
+        contentDescription = contentDescription
     )
 
     override fun mapToSelectableEmotionItem(
         emotion: Emotion,
-        fallbackIcon: Int,
+        @StringRes contentDescription: Int,
+        @DrawableRes fallbackIcon: Int,
         isSelected: Boolean
     ) = SelectableEmotionItem(
         emotionId = emotion.id,
+        contentDescription = contentDescription,
         iconRes = mapIcon(emotion.icon, fallbackIcon),
         isSelected = isSelected
     )

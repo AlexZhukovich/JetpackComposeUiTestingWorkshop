@@ -151,7 +151,7 @@ private fun LoadedSuccessfullyScreen(
                             viewModel.onEvent(AddMoodEvent.OnEmotionChange(emotion.emotionId))
                         },
                     painter = painterResource(emotion.iconRes),
-                    contentDescription = null,
+                    contentDescription = stringResource(emotion.contentDescription),
                     tint = if (emotion.emotionId == selectedEmotion?.emotionId) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }

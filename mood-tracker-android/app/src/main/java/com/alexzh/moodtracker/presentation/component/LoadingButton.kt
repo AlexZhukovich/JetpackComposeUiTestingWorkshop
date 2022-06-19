@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 fun LoadingButton(
     onClick: () -> Unit,
     text: String,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     shape: Shape = MaterialTheme.shapes.small,
     enabled: Boolean = true,
     isLoading: Boolean = false,

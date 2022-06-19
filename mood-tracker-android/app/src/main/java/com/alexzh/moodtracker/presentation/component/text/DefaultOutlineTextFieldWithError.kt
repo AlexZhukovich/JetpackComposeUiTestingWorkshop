@@ -24,7 +24,7 @@ fun NameOutlinedTextFieldWithError(
     placeholder: String = stringResource(R.string.genericTextField_name_placeholder),
     enabled: Boolean = true,
     isError: Boolean = false,
-    errorLabel: String?
+    errorLabel: String? = null
 ) {
     OutlinedTextFieldWithError(
         value = value,
@@ -35,13 +35,13 @@ fun NameOutlinedTextFieldWithError(
         enabled = enabled,
         isError = isError,
         errorLabel = errorLabel,
-        leadingIcon = {
-            Icon(
-                painter = painterResource(R.drawable.ic_person),
-                contentDescription = stringResource(R.string.genericTextField_name_contentDescription),
-                tint = MaterialTheme.colorScheme.outline
-            )
-        }
+//        leadingIcon = {
+//            Icon(
+//                painter = painterResource(R.drawable.ic_person),
+//                contentDescription = stringResource(R.string.genericTextField_name_contentDescription),
+//                tint = MaterialTheme.colorScheme.outline
+//            )
+//        }
     )
 }
 
@@ -54,7 +54,7 @@ fun EmailOutlinedTextFieldWithError(
     placeholder: String = stringResource(R.string.genericTextField_email_placeholder),
     enabled: Boolean = true,
     isError: Boolean = false,
-    errorLabel: String?
+    errorLabel: String? = null
 ) {
     OutlinedTextFieldWithError(
         value = value,
@@ -84,7 +84,7 @@ fun PasswordOutlinedTextFieldWithError(
     placeholder: String = stringResource(R.string.genericTextField_password_placeholder),
     enabled: Boolean = true,
     isError: Boolean = false,
-    errorLabel: String?
+    errorLabel: String? = null
 ) {
     val passwordVisible = remember { mutableStateOf(false) }
     val visualTransformation = if (passwordVisible.value)

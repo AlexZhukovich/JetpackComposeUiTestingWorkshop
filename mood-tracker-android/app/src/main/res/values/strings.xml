@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">MoodTracker</string>
 
+    <!-- Emotions -->
+    <string name="emotions_angry_contentDescription">Angry</string>
+    <string name="emotions_confused_contentDescription">Confused</string>
+    <string name="emotions_neutral_contentDescription">Neutral</string>
+    <string name="emotions_happy_contentDescription">Happy</string>
+    <string name="emotions_excited_contentDescription">Excited</string>
+    <string name="emotions_unknown_contentDescription">Unknown</string>
+
     <!-- Navigation -->
     <string name="navigation_back_contentDescription">Back</string>
     <string name="navigation_today_label">Today</string>

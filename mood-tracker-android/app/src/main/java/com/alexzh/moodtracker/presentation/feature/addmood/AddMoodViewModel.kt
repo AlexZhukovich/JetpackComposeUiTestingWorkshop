@@ -10,6 +10,7 @@ import com.alexzh.moodtracker.data.local.adapter.DATE_TIME_ZONE_UTC
 import com.alexzh.moodtracker.data.model.EmotionHistory
 import com.alexzh.moodtracker.data.util.Result
 import com.alexzh.moodtracker.presentation.core.icon.ActivityIconMapper
+import com.alexzh.moodtracker.presentation.core.icon.EmotionContentDescriptionMapper
 import com.alexzh.moodtracker.presentation.core.icon.EmotionIconMapper
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -19,7 +20,8 @@ import java.time.ZonedDateTime
 class AddMoodViewModel(
     private val emotionHistoryRepository: EmotionHistoryRepository,
     private val activityIconMapper: ActivityIconMapper,
-    private val emotionIconMapper: EmotionIconMapper
+    private val emotionIconMapper: EmotionIconMapper,
+    private val emotionContentDescriptionMapper: EmotionContentDescriptionMapper,
 ) : ViewModel() {
     private var emotionHistory: EmotionHistory? = null
 
@@ -69,9 +71,13 @@ class AddMoodViewModel(
                 time = emotionHistory?.date?.toLocalTime() ?: LocalTime.now(),
                 emotions = emotions.map {
                     emotionIconMapper.mapToSelectableEmotionItem(
-                        it,
-                        R.drawable.ic_question_mark,
-                        emotionHistory?.emotion?.id == it.id
+                        emotion = it,
+                        contentDescription = emotionContentDescriptionMapper.mapHappinessToContentDescription(
+                            it.happinessLevel,
+                            R.string.emotions_unknown_contentDescription
+                        ),
+                        fallbackIcon = R.drawable.ic_question_mark,
+                        emotionHistory?.emotion?.id == it.id,
                     )
                 },
                 activities = activities.map { activity ->

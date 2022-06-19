@@ -9,7 +9,10 @@ import com.alexzh.moodtracker.data.EmotionHistoryRepository
 import com.alexzh.moodtracker.data.local.adapter.DATE_TIME_ZONE_UTC
 import com.alexzh.moodtracker.data.model.EmotionHistory
 import com.alexzh.moodtracker.data.util.Result
+import com.alexzh.moodtracker.presentation.core.date.DateProvider
 import com.alexzh.moodtracker.presentation.core.icon.ActivityIconMapper
+import com.alexzh.moodtracker.presentation.core.icon.DefaultEmotionContentDescriptionMapper
+import com.alexzh.moodtracker.presentation.core.icon.EmotionContentDescriptionMapper
 import com.alexzh.moodtracker.presentation.core.icon.EmotionIconMapper
 import com.alexzh.moodtracker.presentation.feature.today.model.EmotionHistoryItem
 import kotlinx.coroutines.launch
@@ -22,8 +25,10 @@ class TodayViewModel(
     private val emotionHistoryRepository: EmotionHistoryRepository,
     private val emotionIconMapper: EmotionIconMapper,
     private val activityIconMapper: ActivityIconMapper,
+    private val emotionContentDescriptionMapper: EmotionContentDescriptionMapper,
+    dateProvider: DateProvider
 ) : ViewModel() {
-    private val _uiState = mutableStateOf(TodayScreenState())
+    private val _uiState = mutableStateOf(TodayScreenState(date = dateProvider.getCurrentDate()))
     val uiState: State<TodayScreenState> = _uiState
 
     init {
@@ -68,11 +73,21 @@ class TodayViewModel(
             EmotionHistoryItem(
                 id = item.id,
                 note = item.note,
-                iconId = emotionIconMapper.mapToEmotionItem(item.emotion, R.drawable.ic_question_mark).iconRes,
+                iconId = emotionIconMapper.mapToEmotionItem(
+                    item.emotion,
+                    emotionContentDescriptionMapper.mapHappinessToContentDescription(
+                        item.emotion.happinessLevel,
+                        R.string.emotions_unknown_contentDescription
+                    ),
+                    R.drawable.ic_question_mark
+                ).iconRes,
+                iconContentDescription = emotionContentDescriptionMapper.mapHappinessToContentDescription(item.emotion.happinessLevel, R.string.emotions_unknown_contentDescription),
                 formattedDate = item.date.format(DateTimeFormatter.ofPattern("HH:mm")),
                 activities = item.activities.map {
                     activityIconMapper.mapToActivityItem(it, R.drawable.ic_question_mark)
                 }
+
+
             )
         }
     }

@@ -10,12 +10,11 @@ import com.alexzh.moodtracker.data.local.session.SessionManager
 import com.alexzh.moodtracker.data.local.session.SessionManagerImpl
 import com.alexzh.moodtracker.data.remote.interceptor.AuthInterceptor
 import com.alexzh.moodtracker.data.remote.service.UserRemoteServiceFactory
+import com.alexzh.moodtracker.presentation.core.date.DateProvider
+import com.alexzh.moodtracker.presentation.core.date.DateProviderImpl
 import com.alexzh.moodtracker.presentation.core.date.DefaultTimeFormatter
 import com.alexzh.moodtracker.presentation.core.date.TimeFormatter
-import com.alexzh.moodtracker.presentation.core.icon.ActivityIconMapper
-import com.alexzh.moodtracker.presentation.core.icon.DefaultActivityIconMapper
-import com.alexzh.moodtracker.presentation.core.icon.DefaultEmotionIconMapper
-import com.alexzh.moodtracker.presentation.core.icon.EmotionIconMapper
+import com.alexzh.moodtracker.presentation.core.icon.*
 import com.alexzh.moodtracker.presentation.feature.addmood.AddMoodViewModel
 import com.alexzh.moodtracker.presentation.feature.auth.createaccount.CreateAccountViewModel
 import com.alexzh.moodtracker.presentation.feature.auth.login.LoginViewModel
@@ -30,6 +29,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import java.time.LocalDate
 
 val dataModule = module {
     single<SqlDriver> {
@@ -74,12 +74,16 @@ val dataModule = module {
 }
 
 val appModule = module {
+    factory<DateProvider> { DateProviderImpl(LocalDate.now()) }
     factory<ActivityIconMapper> { DefaultActivityIconMapper() }
     factory<EmotionIconMapper> { DefaultEmotionIconMapper() }
+    factory<EmotionContentDescriptionMapper> { DefaultEmotionContentDescriptionMapper() }
     factory<TimeFormatter> { DefaultTimeFormatter() }
 
     viewModel {
         TodayViewModel(
+            get(),
+            get(),
             get(),
             get(),
             get()
@@ -88,6 +92,7 @@ val appModule = module {
 
     viewModel {
         AddMoodViewModel(
+            get(),
             get(),
             get(),
             get()
