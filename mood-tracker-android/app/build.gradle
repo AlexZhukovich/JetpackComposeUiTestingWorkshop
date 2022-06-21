@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.squareup.sqldelight'
+    id 'shot'
 }
 
 sqldelight {
@@ -21,7 +22,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.karumi.shot.ShotTestRunner"
         vectorDrawables {
             useSupportLibrary true
         }
@@ -63,6 +64,7 @@ dependencies {
     implementation "androidx.preference:preference-ktx:$preference_version"
     implementation "androidx.security:security-crypto:$security_version"
     implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "com.google.android.material:material:$material_version"
     implementation "androidx.compose.material3:material3:$compose_material3_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist_version"
@@ -85,9 +87,21 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     testImplementation "com.google.truth:truth:$truth_version"
 
+    androidTestImplementation "androidx.test:runner:$androidXTest_version"
+    androidTestImplementation "androidx.test:rules:$androidXTest_version"
     androidTestImplementation "androidx.test.ext:junit:$junit_ext_version"
+    androidTestImplementation "androidx.arch.core:core-testing:$androidXCoreTesting_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+    androidTestImplementation "io.insert-koin:koin-test:$koin_version"
+    androidTestImplementation "io.insert-koin:koin-test-junit4:$koin_version"
+    androidTestImplementation "com.squareup.sqldelight:sqlite-driver:$sqldelight_version"
+    androidTestImplementation "com.squareup.sqldelight:android-driver:$sqldelight_version"
+    androidTestImplementation "org.mockito:mockito-android:$mockito_version"
+    androidTestImplementation "org.mockito.kotlin:mockito-kotlin:$mockitoKotlin_version"
+    androidTestImplementation "com.github.sergio-sastre:AndroidUiTestingUtils:$androidUiTestingUtils_version"
+    androidTestImplementation "com.google.testparameterinjector:test-parameter-injector:$testParameterInjector_version"
 
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
