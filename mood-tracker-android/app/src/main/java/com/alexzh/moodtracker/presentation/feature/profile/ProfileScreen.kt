@@ -116,16 +116,18 @@ private fun ErrorScreen(
     Column(modifier = Modifier.fillMaxSize()) {
         Button(
             modifier = Modifier.fillMaxWidth(),
-            onClick = { onCreateAccount() }
+            onClick = { onCreateAccount() },
+            shape = MaterialTheme.shapes.small
         ) {
-            Text("CREATE ACCOUNT SCREEN")
+            Text(stringResource(R.string.profileScreen_createAccount_button))
         }
 
         Button(
             modifier = Modifier.fillMaxWidth(),
-            onClick = { onLogin() }
+            onClick = { onLogin() },
+            shape = MaterialTheme.shapes.small
         ) {
-            Text("LOGIN SCREEN")
+            Text(stringResource(R.string.profileScreen_login_button))
         }
 
         errorMessage?.let {

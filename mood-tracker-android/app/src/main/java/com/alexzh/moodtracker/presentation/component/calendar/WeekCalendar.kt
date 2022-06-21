@@ -42,6 +42,7 @@ fun WeekCalendar(
     startDate: LocalDate,
     selectedDate: LocalDate = startDate,
     onSelectedDateChange: (LocalDate) -> Unit,
+    todayDate: LocalDate = LocalDate.now(),
     backgroundColor: Color = MaterialTheme.colorScheme.background,
     todayIndicatorBackgroundColor: Color = MaterialTheme.colorScheme.primary,
     todayIndicatorTextColor: Color = MaterialTheme.colorScheme.onPrimary,
@@ -89,7 +90,7 @@ fun WeekCalendar(
                             modifier = Modifier.fillMaxSize()
                                 .clip(MaterialTheme.shapes.medium)
                                 .background(
-                                    if (day == LocalDate.now()) {
+                                    if (day == todayDate) {
                                         todayIndicatorBackgroundColor
                                     } else {
                                         if (day == selectedDate) {

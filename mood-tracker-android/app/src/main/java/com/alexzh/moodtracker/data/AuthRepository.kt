@@ -6,13 +6,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
 
-    suspend fun createAccount(
+    fun createAccount(
         name: String,
         email: String,
         password: String
     ): Flow<Result<JwtToken>>
 
-    suspend fun logIn(
+    fun logIn(
         email: String,
         password: String
     ): Flow<Result<JwtToken>>

@@ -9,7 +9,6 @@ import com.alexzh.moodtracker.data.remote.model.CreateUserModel
 import com.alexzh.moodtracker.data.remote.model.LoginUserModel
 import com.alexzh.moodtracker.data.remote.service.UserRemoteService
 import com.alexzh.moodtracker.data.util.Result
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.net.ConnectException
@@ -19,7 +18,7 @@ class AuthRepositoryImpl(
     private val sessionManager: SessionManager
 ): AuthRepository {
 
-    override suspend fun createAccount(
+    override fun createAccount(
         name: String,
         email: String,
         password: String
@@ -48,7 +47,7 @@ class AuthRepositoryImpl(
         }
     }
 
-    override suspend fun logIn(
+    override fun logIn(
         email: String,
         password: String
     ): Flow<Result<JwtToken>> {

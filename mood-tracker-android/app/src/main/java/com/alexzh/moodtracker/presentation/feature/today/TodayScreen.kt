@@ -139,7 +139,7 @@ private fun EmotionHistoryItem(
             modifier = Modifier.size(64.dp),
             painter = painterResource(item.iconId),
             tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            contentDescription = null
+            contentDescription = stringResource(item.iconContentDescription)
         )
 
         Column(
@@ -183,7 +183,8 @@ private fun EmotionHistoryItem(
 
             Text(
                 text = item.formattedDate, style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                modifier = Modifier.padding(start = 16.dp)
             )
         }
     }

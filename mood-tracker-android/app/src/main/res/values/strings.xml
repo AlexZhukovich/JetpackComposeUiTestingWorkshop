@@ -44,6 +44,8 @@
     <!-- Profile -->
     <string name="profileScreen_title">Profile</string>
     <string name="profileScreen_logout_contentDescription">Logout</string>
+    <string name="profileScreen_createAccount_button">Create Account</string>
+    <string name="profileScreen_login_button">Login</string>
 
     <!-- Settings -->
     <string name="settingsScreen_title">Settings</string>
