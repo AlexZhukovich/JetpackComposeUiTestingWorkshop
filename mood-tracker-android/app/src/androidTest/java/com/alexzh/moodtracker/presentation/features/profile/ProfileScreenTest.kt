@@ -51,23 +51,31 @@ class ProfileScreenTest: KoinTest {
 
     @Before
     fun setup() {
-        stopKoin()
-        startKoin {
-            allowOverride(true)
-            androidContext(InstrumentationRegistry.getInstrumentation().targetContext)
-            modules(
-                dataModule,
-                appModule,
-                module {
-                    single { authRepository }
-                    single { userRepository }
-                }
-            )
-        }
+//        stopKoin()
+//        startKoin {
+//            allowOverride(true)
+//            androidContext(InstrumentationRegistry.getInstrumentation().targetContext)
+//            modules(
+//                dataModule,
+//                appModule,
+//                module {
+//                    single { authRepository }
+//                    single { userRepository }
+//                }
+//            )
+//        }
     }
 
     @Test
     fun displayUserInfo_WhenUserIsLoggedIn() {
-
+        composeTestRule.apply {
+            setContent {
+                AppNavigation(
+                    navController = rememberAnimatedNavController(),
+                    isBottomBarDisplayed = remember { mutableStateOf(false) },
+                    startDestination = Screens.ProfileScreen
+                )
+            }
+        }
     }
 }

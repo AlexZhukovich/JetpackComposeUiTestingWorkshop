@@ -25,7 +25,67 @@ class TodayScreenE2ETest {
 
     @Test
     fun displayEmotion_WhenEmotionHistoryWasAddedViaAddMoodScreen() {
+        composableTestRule.apply {
+            setContent {
+                AppNavigation(
+                    navController = rememberAnimatedNavController(),
+                    isBottomBarDisplayed = remember { mutableStateOf(false) }
+                )
+            }
 
+            waitUntil {
+                onAllNodesWithText("Emotions")
+                    .fetchSemanticsNodes().size == 1
+            }
+
+            onNode(hasText("Add"))
+                .performClick()
+
+            waitUntil {
+                onAllNodesWithContentDescription("Happy")
+                    .fetchSemanticsNodes().size == 1
+            }
+
+            onNodeWithContentDescription("Happy")
+                .performClick()
+
+            onNodeWithText("Reading")
+                .performClick()
+
+            onNodeWithText("Gaming")
+                .performClick()
+
+            onNodeWithText("Note")
+                .performTextInput("Test note")
+
+            onNode(hasText("Save"))
+                .performScrollTo()
+                .performClick()
+
+            waitUntil {
+                onAllNodesWithText("Emotions")
+                    .fetchSemanticsNodes().size == 1
+            }
+
+            onNode(withEmotionStateAndNote("Happy", "Test note"))
+                .assert(hasAnyChild(hasText("Reading")))
+                .assert(hasAnyChild(hasText("Gaming")))
+
+            // end of test case
+            // clean up
+            onRoot().printToLog("MERGED")
+
+            onNode(hasContentDescription("Happy"))
+                .performSemanticsAction(SemanticsActions.OnClick)
+
+            waitUntil {
+                onAllNodesWithContentDescription("Happy")
+                    .fetchSemanticsNodes().size == 1
+            }
+
+            onNodeWithContentDescription("Delete")
+                .performClick()
+        }
     }
 
     fun withEmotionStateAndNote(

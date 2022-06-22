@@ -37,7 +37,63 @@ class TodayScreenRuntimeDatabaseTest: KoinTest {
 
     @Test
     fun displayEmotion_WhenEmotionHistoryWasAddedViaAddMoodScreen() {
+        stopKoin()
+        startKoin {
+            allowOverride(true)
+            androidContext(InstrumentationRegistry.getInstrumentation().targetContext)
+            modules(
+                dataModule, appModule, runtimeDatabase
+            )
+        }
 
+        composableTestRule.apply {
+            setContent {
+                AppNavigation(
+                    navController = rememberAnimatedNavController(),
+                    isBottomBarDisplayed = remember { mutableStateOf(false) }
+                )
+            }
+
+            waitUntil {
+                onAllNodesWithText("Emotions")
+                    .fetchSemanticsNodes().size == 1
+            }
+
+            onNode(hasText("Add"))
+                .performClick()
+
+            waitUntil {
+                onAllNodesWithContentDescription("Happy")
+                    .fetchSemanticsNodes().size == 1
+            }
+
+            onNodeWithContentDescription("Happy")
+                .performClick()
+
+            onNodeWithText("Reading")
+                .performClick()
+
+            onNodeWithText("Gaming")
+                .performClick()
+
+            onNodeWithText("Note")
+                .performTextInput("Test note")
+
+            onNode(hasText("Save"))
+                .performScrollTo()
+                .performClick()
+
+            onRoot().printToLog("MERGED")
+
+            waitUntil {
+                onAllNodesWithText("Emotions")
+                    .fetchSemanticsNodes().size == 1
+            }
+
+            onNode(withEmotionStateAndNote("Happy", "Test note"))
+                .assert(hasAnyChild(hasText("Reading")))
+                .assert(hasAnyChild(hasText("Gaming")))
+        }
     }
 
     fun withEmotionStateAndNote(
