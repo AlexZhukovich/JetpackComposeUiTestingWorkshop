@@ -21,12 +21,34 @@ class LoadingButtonScreenshotTest : ScreenshotTest {
     @MediumTest
     @Test
     fun loadingButton_defaultState() {
+        composableTestRule.apply {
+            setContent {
+                LoadingButton(
+                    text = "Some text",
+                    isLoading = false,
+                    onClick = {},
+                )
+            }
 
+            compareScreenshot(composableTestRule, "loadingButton_defaultState")
+        }
     }
 
     @MediumTest
     @Test
     fun loadingButton_loadingState() {
+        composableTestRule.apply {
+            setContent {
+                mainClock.autoAdvance = false
+                LoadingButton(
+                    text = "Some text",
+                    isLoading = true,
+                    onClick = {},
+                )
+            }
 
+            mainClock.advanceTimeBy(400)
+            compareScreenshot(composableTestRule, "loadingButton_loadingState")
+        }
     }
 }

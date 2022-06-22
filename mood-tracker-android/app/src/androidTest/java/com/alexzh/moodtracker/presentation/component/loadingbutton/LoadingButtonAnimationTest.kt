@@ -18,8 +18,28 @@ class LoadingButtonAnimationTest : ScreenshotTest {
     @get:Rule
     val composableTestRule = createComposeRule()
 
+    @MediumTest
     @Test
     fun loadingButton_loadingAnimation() {
+        composableTestRule.apply {
+            setContent {
+                mainClock.autoAdvance = false
+                LoadingButton(
+                    text = "Some text",
+                    isLoading = true,
+                    onClick = {},
+                )
+            }
 
+            compareScreenshot(composableTestRule, "loadingButton_loadingAnimation_state0")
+            mainClock.advanceTimeBy(100)
+            compareScreenshot(composableTestRule, "loadingButton_loadingAnimation_state1")
+            mainClock.advanceTimeBy(200)
+            compareScreenshot(composableTestRule, "loadingButton_loadingAnimation_state2")
+            mainClock.advanceTimeBy(300)
+            compareScreenshot(composableTestRule, "loadingButton_loadingAnimation_state3")
+            mainClock.advanceTimeBy(400)
+            compareScreenshot(composableTestRule, "loadingButton_loadingAnimation_state4")
+        }
     }
 }
