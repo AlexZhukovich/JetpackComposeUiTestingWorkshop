@@ -1,10 +1,19 @@
 package com.alexzh.moodtracker.presentation.features.settings
 
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
+import androidx.compose.ui.unit.dp
 import androidx.test.filters.MediumTest
+import com.alexzh.moodtracker.presentation.component.LoadingButton
 import com.alexzh.moodtracker.presentation.feature.settings.SettingsScreen
 import com.alexzh.moodtracker.presentation.navigation.Screens
 import com.alexzh.moodtracker.presentation.theme.AppTheme
@@ -26,17 +35,51 @@ import sergio.sastre.uitesting.utils.common.UiMode
 class SettingsScreenScreenshotTest : ScreenshotTest {
 
     @get:Rule
-    val composeEmptyTestRule = createEmptyComposeRule()
+    val composeTestRule = createEmptyComposeRule()
 
     @MediumTest
     @Test
     fun settingsScreen_defaultState() {
+        val activityScenario = ActivityScenarioConfigurator.ForComposable()
+            .setUiMode(UiMode.DAY)
+            .launchConfiguredActivity()
+            .onActivity {
+                it.setContent {
+                    AppTheme {
+                        SettingsScreen(
+                            onProfile = {},
+                            onDocs = {}
+                        )
+                    }
+                }
+            }
 
+        activityScenario.waitForActivity()
+        compareScreenshot(composeTestRule, "settingsScreen_light_defaultState")
+
+        activityScenario.close()
     }
 
     @MediumTest
     @Test
     fun settingsScreen_dark_defaultState() {
+        val activityScenario = ActivityScenarioConfigurator.ForComposable()
+            .setUiMode(UiMode.NIGHT)
+            .launchConfiguredActivity()
+            .onActivity {
+                it.setContent {
+                    AppTheme {
+                        SettingsScreen(
+                            onProfile = {},
+                            onDocs = {}
+                        )
+                    }
+                }
+            }
 
+        activityScenario.waitForActivity()
+        compareScreenshot(composeTestRule, "settingsScreen_dark_defaultState")
+
+        activityScenario.close()
     }
 }
