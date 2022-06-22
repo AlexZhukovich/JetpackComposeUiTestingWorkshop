@@ -51,23 +51,26 @@ class ProfileScreenTest: KoinTest {
 
     @Before
     fun setup() {
-//        stopKoin()
-//        startKoin {
-//            allowOverride(true)
-//            androidContext(InstrumentationRegistry.getInstrumentation().targetContext)
-//            modules(
-//                dataModule,
-//                appModule,
-//                module {
-//                    single { authRepository }
-//                    single { userRepository }
-//                }
-//            )
-//        }
+        stopKoin()
+        startKoin {
+            allowOverride(true)
+            androidContext(InstrumentationRegistry.getInstrumentation().targetContext)
+            modules(
+                dataModule,
+                appModule,
+                module {
+                    single { authRepository }
+                    single { userRepository }
+                }
+            )
+        }
     }
 
     @Test
-    fun displayUserInfo_WhenUserIsLoggedIn() {
+    fun errorCase() {
+        whenever(userRepository.getUserInfo())
+            .thenReturn(flowOf(Result.Error(Unauthorized())))
+
         composeTestRule.apply {
             setContent {
                 AppNavigation(
@@ -76,6 +79,50 @@ class ProfileScreenTest: KoinTest {
                     startDestination = Screens.ProfileScreen
                 )
             }
+
+            onNodeWithText("Login")
+                .assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun displayUserInfo_WhenUserIsLoggedIn() {
+        val email = "test@test.com"
+        val password = "test"
+        val username = "Test"
+
+        whenever(userRepository.getUserInfo())
+            .thenReturn(flowOf(Result.Error(Unauthorized())))
+            .thenReturn(flowOf(Result.Success(UserInfoModel(email, username))))
+        whenever(authRepository.logIn(email, password))
+            .thenReturn(flowOf(Result.Success(JwtToken(UUID.randomUUID().toString()))))
+
+        composeTestRule.apply {
+            setContent {
+                AppNavigation(
+                    navController = rememberAnimatedNavController(),
+                    isBottomBarDisplayed = remember { mutableStateOf(false) },
+                    startDestination = Screens.ProfileScreen
+                )
+            }
+
+            onNodeWithText("Login")
+                .performClick()
+
+            onNodeWithText("Email")
+                .performTextInput(email)
+
+            onNodeWithText("Password")
+                .performTextInput(password)
+
+            onNode(hasText("LOGIN"))
+                .performClick()
+
+            onNodeWithText(email)
+                .assertIsDisplayed()
+
+            onNodeWithText(username)
+                .assertIsDisplayed()
         }
     }
 }

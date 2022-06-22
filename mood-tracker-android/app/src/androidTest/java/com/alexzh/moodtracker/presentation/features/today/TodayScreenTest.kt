@@ -2,6 +2,7 @@ package com.alexzh.moodtracker.presentation.features.today
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.platform.app.InstrumentationRegistry
 import com.alexzh.moodtracker.data.EmotionHistoryRepository
@@ -58,7 +59,7 @@ class TodayScreenTest : ScreenshotTest, KoinTest {
         val emotionHistoryRepo: EmotionHistoryRepository = mock {
             on { getEmotionsHistoryByDate(any(), any()) } doReturn
                 flowOf(Result.Success(listOf(EmotionHistoryTestData.EMOTION_HISTORY_ITEM(testDate))))
-            }
+        }
 
         startKoin {
             allowOverride(true)
@@ -75,17 +76,90 @@ class TodayScreenTest : ScreenshotTest, KoinTest {
             )
         }
 
-        // TODO: FINISH TEST CASE
+        composableTestRule.apply {
+            setContent {
+                TodayScreen(
+                    viewModel = get(),
+                    onAdd = {},
+                    onEdit = {}
+                )
+            }
+
+            onNodeWithContentDescription("Excited")
+                .assertIsDisplayed()
+        }
     }
 
     @Test
     fun displaySuccessWithMultipleItems_whenDataIsAvailable() {
+        val emotionHistoryRepo: EmotionHistoryRepository = mock {
+            on { getEmotionsHistoryByDate(any(), any()) } doReturn
+                    flowOf(Result.Success(EmotionHistoryTestData.EMOTION_HISTORY_ITEMS(testDate)))
+        }
 
+        startKoin {
+            allowOverride(true)
+            androidContext(InstrumentationRegistry.getInstrumentation().targetContext)
+            modules(
+                listOf(
+                    appModule,
+                    dataModule,
+                    module {
+                        single { emotionHistoryRepo }
+                        single<DateProvider> { DateProviderImpl(testDate) }
+                    }
+                )
+            )
+        }
+
+        composableTestRule.apply {
+            setContent {
+                TodayScreen(
+                    viewModel = get(),
+                    onAdd = {},
+                    onEdit = {}
+                )
+            }
+
+            onAllNodesWithContentDescription("Excited")
+                .assertCountEquals(2)
+        }
     }
 
     @Test
     fun displayEmptyState_whenDataIsNotAvailable() {
+        val emotionHistoryRepo: EmotionHistoryRepository = mock {
+            on { getEmotionsHistoryByDate(any(), any()) } doReturn
+                    flowOf(Result.Success(emptyList()))
+        }
 
+        startKoin {
+            allowOverride(true)
+            androidContext(InstrumentationRegistry.getInstrumentation().targetContext)
+            modules(
+                listOf(
+                    appModule,
+                    dataModule,
+                    module {
+                        single { emotionHistoryRepo }
+                        single<DateProvider> { DateProviderImpl(testDate) }
+                    }
+                )
+            )
+        }
+
+        composableTestRule.apply {
+            setContent {
+                TodayScreen(
+                    viewModel = get(),
+                    onAdd = {},
+                    onEdit = {}
+                )
+            }
+
+            onNodeWithText("No data")
+                .assertIsDisplayed()
+        }
     }
 
     @After
