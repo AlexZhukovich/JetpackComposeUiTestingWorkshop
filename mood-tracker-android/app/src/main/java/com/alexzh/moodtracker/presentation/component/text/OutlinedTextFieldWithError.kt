@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Build
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -71,6 +72,7 @@ fun OutlinedTextFieldWithError(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OutlinedTextFieldWithError(
     value: String,

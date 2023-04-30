@@ -24,7 +24,7 @@ fun SettingsScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            SmallTopAppBar(
+            TopAppBar(
                 modifier = Modifier.background(color = MaterialTheme.colorScheme.inversePrimary),
                 title = { Text(stringResource(R.string.settingsScreen_title)) }
             )

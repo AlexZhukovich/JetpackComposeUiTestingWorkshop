@@ -23,7 +23,6 @@ import com.alexzh.moodtracker.presentation.feature.stats.StatisticsScreen
 import com.alexzh.moodtracker.presentation.feature.today.TodayScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
-import org.jetbrains.annotations.TestOnly
 import org.koin.androidx.compose.get
 
 @ExperimentalFoundationApi
