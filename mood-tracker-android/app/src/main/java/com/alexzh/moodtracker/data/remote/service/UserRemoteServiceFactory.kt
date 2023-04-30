@@ -1,6 +1,8 @@
 package com.alexzh.moodtracker.data.remote.service
 
 import com.alexzh.moodtracker.data.remote.interceptor.AuthInterceptor
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,18 +22,26 @@ class UserRemoteServiceFactory {
             createLoggingInterceptor(isDebug),
             authInterceptor
         )
-        return createMoodTrackerRemoteService(okHttpClient)
+        val gson = createGson()
+        return createMoodTrackerRemoteService(gson, okHttpClient)
     }
 
     private fun createMoodTrackerRemoteService(
+        gson: Gson,
         okHttpClient: OkHttpClient
     ): UserRemoteService {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
         return retrofit.create(UserRemoteService::class.java)
+    }
+
+    private fun createGson(): Gson {
+        return GsonBuilder()
+            .setLenient()
+            .create()
     }
 
     private fun createOkHttpClient(
