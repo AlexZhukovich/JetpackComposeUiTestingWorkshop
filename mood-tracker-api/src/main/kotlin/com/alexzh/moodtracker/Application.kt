@@ -12,12 +12,12 @@ fun main(args: Array<String>): Unit =
 fun Application.module() {
     configureDependencyInjection()
     configureStatusPages()
+    configureAuthentication()
     configureRouting()
     configureContentNegotiation()
     configureSerialization()
     configureHTTP()
     configureMonitoring()
-    configureAuthentication()
 
     val databaseConnector: DatabaseConnector = get(DatabaseConnector::class.java)
     databaseConnector.connect()
