@@ -47,7 +47,7 @@ fun AddMoodScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            SmallTopAppBar(
+            TopAppBar(
                 modifier = Modifier.background(color = MaterialTheme.colorScheme.inversePrimary),
                 title = { Text(stringResource(R.string.addMoodScreen_title)) },
                 navigationIcon = {
@@ -206,13 +206,15 @@ private fun LoadedSuccessfullyScreen(
                                 contentDescription = null
                             )
                         },
-                        selectedIcon = {
-                            Icon(
-                                modifier = Modifier.size(18.dp),
-                                painter = painterResource(R.drawable.ic_check),
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary
-                            )
+                        trailingIcon = {
+                            if (activity.isSelected) {
+                                Icon(
+                                    modifier = Modifier.size(18.dp),
+                                    painter = painterResource(R.drawable.ic_check),
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                            }
                         },
                     )
                 }

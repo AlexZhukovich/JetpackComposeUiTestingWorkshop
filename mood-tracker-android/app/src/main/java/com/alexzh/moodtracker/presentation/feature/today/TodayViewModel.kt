@@ -11,7 +11,6 @@ import com.alexzh.moodtracker.data.model.EmotionHistory
 import com.alexzh.moodtracker.data.util.Result
 import com.alexzh.moodtracker.presentation.core.date.DateProvider
 import com.alexzh.moodtracker.presentation.core.icon.ActivityIconMapper
-import com.alexzh.moodtracker.presentation.core.icon.DefaultEmotionContentDescriptionMapper
 import com.alexzh.moodtracker.presentation.core.icon.EmotionContentDescriptionMapper
 import com.alexzh.moodtracker.presentation.core.icon.EmotionIconMapper
 import com.alexzh.moodtracker.presentation.feature.today.model.EmotionHistoryItem
@@ -86,8 +85,6 @@ class TodayViewModel(
                 activities = item.activities.map {
                     activityIconMapper.mapToActivityItem(it, R.drawable.ic_question_mark)
                 }
-
-
             )
         }
     }

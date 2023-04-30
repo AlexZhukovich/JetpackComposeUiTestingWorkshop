@@ -25,7 +25,7 @@ fun StatisticsScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            SmallTopAppBar(
+            TopAppBar(
                 modifier = Modifier.background(color = MaterialTheme.colorScheme.inversePrimary),
                 title = { Text(stringResource(R.string.statisticsScreen_title)) }
             )
