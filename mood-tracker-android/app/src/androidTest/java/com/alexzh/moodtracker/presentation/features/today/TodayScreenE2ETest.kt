@@ -9,8 +9,8 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.navigation.compose.rememberNavController
 import com.alexzh.moodtracker.presentation.navigation.AppNavigation
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import org.junit.Rule
 import org.junit.Test
 
@@ -28,7 +28,7 @@ class TodayScreenE2ETest {
         composableTestRule.apply {
             setContent {
                 AppNavigation(
-                    navController = rememberAnimatedNavController(),
+                    navController = rememberNavController(),
                     isBottomBarDisplayed = remember { mutableStateOf(false) }
                 )
             }
@@ -38,7 +38,7 @@ class TodayScreenE2ETest {
                     .fetchSemanticsNodes().size == 1
             }
 
-            onNode(hasText("Add"))
+            onNode(hasContentDescription("Add"))
                 .performClick()
 
             waitUntil {

@@ -11,9 +11,9 @@ import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
+import androidx.navigation.compose.rememberNavController
 import com.alexzh.moodtracker.presentation.navigation.AppNavigation
 import com.alexzh.moodtracker.presentation.navigation.Screens
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @ExperimentalMaterial3Api
 @ExperimentalComposeUiApi
@@ -26,7 +26,7 @@ open class BaseOperation(
     fun launchScreen(screen: Screens) {
         composeTestRule.setContent {
             AppNavigation(
-                navController = rememberAnimatedNavController(),
+                navController = rememberNavController(),
                 isBottomBarDisplayed = remember { mutableStateOf(false) },
                 startDestination = screen
             )

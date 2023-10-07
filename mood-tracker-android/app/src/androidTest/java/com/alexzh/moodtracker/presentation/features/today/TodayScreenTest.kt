@@ -12,15 +12,12 @@ import com.alexzh.moodtracker.di.dataModule
 import com.alexzh.moodtracker.presentation.core.date.DateProvider
 import com.alexzh.moodtracker.presentation.core.date.DateProviderImpl
 import com.alexzh.moodtracker.presentation.feature.today.TodayScreen
-import com.alexzh.moodtracker.presentation.feature.today.TodayViewModel
 import com.alexzh.moodtracker.testData.EmotionHistoryTestData
 import com.karumi.shot.ScreenshotTest
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.TestDispatcher
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.After
@@ -43,10 +40,10 @@ import java.time.LocalDate
 @ExperimentalCoroutinesApi
 class TodayScreenTest : ScreenshotTest, KoinTest {
     private val testDate = LocalDate.of(2022, 3, 22)
+    private val testDispatcher: CoroutineDispatcher = Dispatchers.Unconfined
 
     @get:Rule
     val composableTestRule = createComposeRule()
-    private val testDispatcher: TestDispatcher = UnconfinedTestDispatcher()
 
     @Before
     fun setUp() {

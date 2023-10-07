@@ -1,7 +1,7 @@
 package com.alexzh.moodtracker.presentation.feature.auth.createaccount
 
 sealed class CreateAccountEvent {
-    object CreateAccount: CreateAccountEvent()
+    data object CreateAccount: CreateAccountEvent()
 
     data class EmailChange(
         val email: String

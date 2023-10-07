@@ -30,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import com.alexzh.moodtracker.R
 import com.alexzh.moodtracker.presentation.component.OutlineDatePicker
 import com.alexzh.moodtracker.presentation.component.OutlineTimePicker
-import com.google.accompanist.flowlayout.FlowRow
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
@@ -47,7 +46,7 @@ fun AddMoodScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            SmallTopAppBar(
+            TopAppBar(
                 modifier = Modifier.background(color = MaterialTheme.colorScheme.inversePrimary),
                 title = { Text(stringResource(R.string.addMoodScreen_title)) },
                 navigationIcon = {
@@ -115,6 +114,7 @@ fun AddMoodScreen(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @ExperimentalMaterial3Api
 @Composable
 private fun LoadedSuccessfullyScreen(
@@ -183,8 +183,7 @@ private fun LoadedSuccessfullyScreen(
             FlowRow(
                 modifier = Modifier.fillMaxWidth()
                     .padding(8.dp),
-                mainAxisSpacing = 8.dp,
-                crossAxisSpacing = 0.dp,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 state.activities.forEach { activity ->
                     FilterChip(
@@ -206,13 +205,15 @@ private fun LoadedSuccessfullyScreen(
                                 contentDescription = null
                             )
                         },
-                        selectedIcon = {
-                            Icon(
-                                modifier = Modifier.size(18.dp),
-                                painter = painterResource(R.drawable.ic_check),
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary
-                            )
+                        trailingIcon = {
+                            if (activity.isSelected) {
+                                Icon(
+                                    modifier = Modifier.size(18.dp),
+                                    painter = painterResource(R.drawable.ic_check),
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                            }
                         },
                     )
                 }

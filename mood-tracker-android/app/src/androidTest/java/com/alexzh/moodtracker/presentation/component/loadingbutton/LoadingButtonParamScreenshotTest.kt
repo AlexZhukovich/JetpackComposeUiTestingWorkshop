@@ -1,21 +1,9 @@
 package com.alexzh.moodtracker.presentation.component.loadingbutton
 
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
-import androidx.compose.ui.unit.dp
 import androidx.test.filters.MediumTest
-import androidx.test.filters.SmallTest
 import com.alexzh.moodtracker.presentation.component.LoadingButton
-import com.alexzh.moodtracker.presentation.feature.settings.SettingsScreen
-import com.alexzh.moodtracker.presentation.theme.AppTheme
 import com.google.testing.junit.testparameterinjector.TestParameter
 import com.google.testing.junit.testparameterinjector.TestParameterInjector
 import com.karumi.shot.ActivityScenarioUtils.waitForActivity
@@ -34,7 +22,7 @@ class LoadingButtonParamScreenshotTest : ScreenshotTest {
 
     enum class Name(val text: String) {
         SHORT("short name"),
-        LONG("super long super long super long  super long  super long ")
+        LONG("super long super long super long  super long  super long super long super long")
     }
 
     @MediumTest
@@ -42,7 +30,6 @@ class LoadingButtonParamScreenshotTest : ScreenshotTest {
     fun loadingButton_customUiModeAndLoading(
         @TestParameter uiMode: UiMode,
         @TestParameter isLoading: Boolean,
-//        @TestParameter("long", "short}") name: String
         @TestParameter name: Name
     ) {
         val loadingDescription = if (isLoading) "loading" else "default"

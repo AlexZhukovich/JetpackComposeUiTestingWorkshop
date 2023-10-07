@@ -33,7 +33,7 @@ fun ProfileScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            SmallTopAppBar(
+            TopAppBar(
                 modifier = Modifier.background(color = MaterialTheme.colorScheme.inversePrimary),
                 title = { Text(stringResource(R.string.profileScreen_title)) },
                 navigationIcon = {

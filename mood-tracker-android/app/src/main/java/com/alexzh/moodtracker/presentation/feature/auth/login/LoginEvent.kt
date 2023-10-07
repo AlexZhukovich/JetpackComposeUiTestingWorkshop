@@ -1,7 +1,7 @@
 package com.alexzh.moodtracker.presentation.feature.auth.login
 
 sealed class LoginEvent {
-    object Login: LoginEvent()
+    data object Login: LoginEvent()
 
     data class EmailChange(
         val email: String
