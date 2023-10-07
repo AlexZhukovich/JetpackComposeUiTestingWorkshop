@@ -3,7 +3,12 @@ package com.alexzh.moodtracker.presentation.features.profile.dsl
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.test.*
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import androidx.navigation.compose.rememberNavController
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.alexzh.moodtracker.data.AuthRepository
@@ -14,6 +19,8 @@ import com.alexzh.moodtracker.data.remote.model.UserInfoModel
 import com.alexzh.moodtracker.data.util.Result
 import com.alexzh.moodtracker.di.appModule
 import com.alexzh.moodtracker.di.dataModule
+import com.alexzh.moodtracker.presentation.navigation.AppNavigation
+import com.alexzh.moodtracker.presentation.navigation.Screens
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Before
 import org.junit.Test
@@ -55,26 +62,96 @@ class ProfileScreenDslTest: BaseComposeTest() {
 
     @Test
     fun shouldBeDisplayedUsedInformation_WhenUserIsLoggedIn() {
-        val email = "test@test.com"
-        val password = "test"
-        val username = "Test"
-
         whenever(userRepository.getUserInfo())
             .thenReturn(flowOf(Result.Error(Unauthorized())))
-            .thenReturn(flowOf(Result.Success(UserInfoModel(email, username))))
-        whenever(authRepository.logIn(email, password))
+            .thenReturn(flowOf(Result.Success(UserInfoModel("test-account@alexzh.com", "Test User"))))
+        whenever(authRepository.logIn("test-account@alexzh.com", "test-password"))
             .thenReturn(flowOf(Result.Success(JwtToken(UUID.randomUUID().toString()))))
 
-        profileScreen {
-            launch()
-            hasTitle()
-            tapOnLogin()
+
+        composeTestRule.apply {
+            setContent {
+                AppNavigation(
+                    navController = rememberNavController(),
+                    isBottomBarDisplayed = remember { mutableStateOf(false) },
+                    startDestination = Screens.ProfileScreen
+                )
+            }
+
+            profileScreen(composeTestRule) {
+                tapOnLogin()
+            }
+            loginScreen(composeTestRule) {
+                login(
+                    email = "test-account@alexzh.com",
+                    password = "test-password"
+                )
+            }
+            profileScreen(composeTestRule) {
+                hasUserInfo(
+                    email = "test-account@alexzh.com",
+                    name = "Test User"
+                )
+            }
         }
-        loginScreen {
-            login(email, password)
+    }
+
+    open class BaseOperations(private val composableRule: ComposeContentTestRule) {
+
+        fun enterText(inputFieldLabel: String, text: String) {
+            composableRule.onNodeWithText(inputFieldLabel)
+                .performTextInput(text)
         }
-        profileScreen {
-            hasUserInfo(email, username)
+
+        fun hasText(text: String) {
+            composableRule.onNodeWithText(text)
+                .assertIsDisplayed()
+        }
+
+        fun clickOnText(text: String) {
+            composableRule.onNodeWithText(text)
+                .performClick()
+        }
+    }
+
+    fun profileScreen(
+        composableRule: ComposeContentTestRule,
+        func: ProfileScreenRobot.() -> Unit
+    ) = ProfileScreenRobot(composableRule).apply(func)
+
+    class ProfileScreenRobot(
+        composableRule: ComposeContentTestRule
+    ) : BaseOperations(composableRule) {
+
+        fun tapOnLogin() {
+            clickOnText("Login")
+        }
+
+        fun hasUserInfo(
+            email: String,
+            name: String
+        ) {
+            hasText(email)
+            hasText(name)
+        }
+    }
+
+    fun loginScreen(
+        composableRule: ComposeContentTestRule,
+        func: LoginScreenRobot.() -> Unit
+    ) = LoginScreenRobot(composableRule).apply(func)
+
+    class LoginScreenRobot(
+        composableRule: ComposeContentTestRule
+    ) : BaseOperations(composableRule) {
+
+        fun login(
+            email: String,
+            password: String
+        ) {
+            enterText("Email", email)
+            enterText("Password", password)
+            clickOnText("LOGIN")
         }
     }
 }
