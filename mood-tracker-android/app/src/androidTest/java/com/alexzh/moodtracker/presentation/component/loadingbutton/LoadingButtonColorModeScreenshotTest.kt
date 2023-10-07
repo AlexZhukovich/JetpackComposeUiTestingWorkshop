@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,7 +38,7 @@ class LoadingButtonColorModeScreenshotTest : ScreenshotTest {
                     AppTheme {
                         Box(
                             modifier = Modifier.size(300.dp, height = 100.dp)
-                                .background(Color(51,50,51)),
+                                .background(MaterialTheme.colorScheme.background),
                             contentAlignment = Alignment.Center
                         ) {
                             LoadingButton(

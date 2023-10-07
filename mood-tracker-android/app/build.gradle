@@ -13,8 +13,9 @@ sqldelight {
 }
 
 android {
-    compileSdk 33
-
+    compileSdk 34
+    namespace 'com.alexzh.moodtracker'
+    testNamespace 'com.alexzh.moodtracker.test'
     defaultConfig {
         applicationId "com.alexzh.moodtracker"
         minSdk 23
@@ -46,39 +47,30 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion kotlin_compiler_extenstion_version
+        kotlinCompilerExtensionVersion compose_compiler_version
     }
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
-    namespace 'com.alexzh.moodtracker'
-    testNamespace 'com.alexzh.moodtracker.test'
 }
 
 dependencies {
-    def composeBom = platform("androidx.compose:compose-bom:$compose_bom_version")
+    implementation platform("androidx.compose:compose-bom:$compose_version")
 
     coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:$desugarJdkLibs_version"
-    implementation composeBom
-    implementation "androidx.compose.ui:ui"
-    implementation "androidx.compose.material:material"
-    implementation 'androidx.compose.foundation:foundation'
-    implementation "androidx.compose.ui:ui-tooling-preview"
-    implementation 'androidx.activity:activity-compose'
-    implementation 'androidx.compose.material:material-icons-core'
-    implementation 'androidx.compose.material:material-icons-extended'
-    implementation "androidx.compose.material3:material3"
 
     implementation "androidx.core:core-ktx:$core_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    implementation "com.google.android.material:material:$material_version"
     implementation "androidx.preference:preference-ktx:$preference_version"
     implementation "androidx.security:security-crypto:$security_version"
-    implementation "com.google.android.material:material:$material_version"
-    implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist_version"
-    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
-    implementation "com.google.accompanist:accompanist-flowlayout:$accompanist_version"
+    implementation "androidx.compose.foundation:foundation"
+    implementation "androidx.compose.ui:ui"
+    implementation "androidx.compose.material3:material3:$compose_material3_version"
+    implementation "androidx.navigation:navigation-compose:$androidxNavigation"
+    implementation "androidx.constraintlayout:constraintlayout-compose:$compose_constraintLayout_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "io.insert-koin:koin-android:$koin_version"
     implementation "io.insert-koin:koin-androidx-compose:$koin_version"
@@ -90,18 +82,18 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
-    debugImplementation "androidx.compose.ui:ui-tooling"
-    debugImplementation "androidx.compose.ui:ui-test-manifest"
-
     testImplementation "junit:junit:$junit_version"
     testImplementation "com.squareup.sqldelight:sqlite-driver:$sqldelight_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     testImplementation "com.google.truth:truth:$truth_version"
 
-    androidTestImplementation "androidx.test:runner:$androidXTest_version"
-    androidTestImplementation "androidx.test:rules:$androidXTest_version"
+    androidTestImplementation "androidx.test:core:$androidxTestCore_version"
+    androidTestImplementation "androidx.test:core-ktx:$androidxTestCore_version"
+    androidTestImplementation "androidx.test:runner:$androidxTestRunner_version"
+    androidTestImplementation "androidx.test:rules:$androidxTestRules_version"
     androidTestImplementation "androidx.test.ext:junit:$junit_ext_version"
-    androidTestImplementation "androidx.arch.core:core-testing:$androidXCoreTesting_version"
+    androidTestImplementation "androidx.test.ext:junit-ktx:$junit_ext_version"
+    androidTestImplementation "androidx.arch.core:core-testing:$androidxCoreTesting_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
     androidTestImplementation "androidx.compose.ui:ui-test-junit4"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
@@ -113,4 +105,7 @@ dependencies {
     androidTestImplementation "org.mockito.kotlin:mockito-kotlin:$mockitoKotlin_version"
     androidTestImplementation "com.github.sergio-sastre:AndroidUiTestingUtils:$androidUiTestingUtils_version"
     androidTestImplementation "com.google.testparameterinjector:test-parameter-injector:$testParameterInjector_version"
+
+    debugImplementation "androidx.compose.ui:ui-tooling:"
+    debugImplementation "androidx.compose.ui:ui-test-manifest"
 }

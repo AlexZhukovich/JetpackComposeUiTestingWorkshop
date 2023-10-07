@@ -20,10 +20,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.alexzh.moodtracker.presentation.navigation.AppNavigation
 import com.alexzh.moodtracker.presentation.navigation.Screens
 import com.alexzh.moodtracker.presentation.theme.AppTheme
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
@@ -33,7 +33,7 @@ class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navController = rememberAnimatedNavController()
+            val navController = rememberNavController()
             val backStackEntry by navController.currentBackStackEntryAsState()
             val currentRoute = backStackEntry?.destination?.route
             val items = listOf(

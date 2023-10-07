@@ -21,7 +21,6 @@ import com.alexzh.moodtracker.di.appModule
 import com.alexzh.moodtracker.di.dataModule
 import com.alexzh.moodtracker.presentation.navigation.AppNavigation
 import com.alexzh.moodtracker.presentation.navigation.Screens
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Before
 import org.junit.Rule

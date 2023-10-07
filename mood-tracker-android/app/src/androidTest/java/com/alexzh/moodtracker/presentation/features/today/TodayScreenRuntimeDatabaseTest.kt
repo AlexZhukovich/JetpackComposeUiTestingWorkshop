@@ -15,7 +15,6 @@ import com.alexzh.moodtracker.di.appModule
 import com.alexzh.moodtracker.di.dataModule
 import com.alexzh.moodtracker.di.runtimeDatabase
 import com.alexzh.moodtracker.presentation.navigation.AppNavigation
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
 import org.junit.Rule

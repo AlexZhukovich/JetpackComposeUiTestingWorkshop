@@ -12,6 +12,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.alexzh.moodtracker.presentation.feature.addmood.AddMoodScreen
 import com.alexzh.moodtracker.presentation.feature.auth.createaccount.CreateAccountScreen
@@ -21,8 +23,6 @@ import com.alexzh.moodtracker.presentation.feature.profile.ProfileScreen
 import com.alexzh.moodtracker.presentation.feature.settings.SettingsScreen
 import com.alexzh.moodtracker.presentation.feature.stats.StatisticsScreen
 import com.alexzh.moodtracker.presentation.feature.today.TodayScreen
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.google.accompanist.navigation.animation.composable
 import org.koin.androidx.compose.get
 
 @ExperimentalFoundationApi
@@ -35,7 +35,7 @@ fun AppNavigation(
     isBottomBarDisplayed: MutableState<Boolean>,
     startDestination: Screens = Screens.TodayScreen
 ) {
-    AnimatedNavHost(
+    NavHost(
         navController = navController,
         startDestination = startDestination.route,
         enterTransition = { fadeIn(animationSpec = tween(400)) },

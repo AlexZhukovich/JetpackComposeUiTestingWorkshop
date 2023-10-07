@@ -18,7 +18,6 @@ import com.alexzh.moodtracker.R
 import com.alexzh.moodtracker.presentation.component.Section
 import com.alexzh.moodtracker.presentation.component.calendar.WeekCalendar
 import com.alexzh.moodtracker.presentation.feature.today.model.EmotionHistoryItem
-import com.google.accompanist.flowlayout.FlowRow
 import java.util.*
 
 @ExperimentalFoundationApi
@@ -123,6 +122,7 @@ private fun SuccessScreen(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @ExperimentalMaterial3Api
 @Composable
 private fun EmotionHistoryItem(
@@ -151,8 +151,7 @@ private fun EmotionHistoryItem(
 
             FlowRow(
                 modifier = Modifier.fillMaxWidth(),
-                mainAxisSpacing = 4.dp,
-                crossAxisSpacing = 0.dp,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 item.activities.forEach { activity ->
                     AssistChip(

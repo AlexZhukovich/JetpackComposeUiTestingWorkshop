@@ -35,13 +35,13 @@ fun NameOutlinedTextFieldWithError(
         enabled = enabled,
         isError = isError,
         errorLabel = errorLabel,
-//        leadingIcon = {
-//            Icon(
-//                painter = painterResource(R.drawable.ic_person),
-//                contentDescription = stringResource(R.string.genericTextField_name_contentDescription),
-//                tint = MaterialTheme.colorScheme.outline
-//            )
-//        }
+        leadingIcon = {
+            Icon(
+                painter = painterResource(R.drawable.ic_person),
+                contentDescription = stringResource(R.string.genericTextField_name_contentDescription),
+                tint = MaterialTheme.colorScheme.outline
+            )
+        }
     )
 }
 

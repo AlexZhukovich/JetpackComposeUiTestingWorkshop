@@ -1,7 +1,7 @@
 package com.alexzh.moodtracker.presentation.feature.stats
 
 sealed class StatisticsEvent {
-    object LoadPreviousWeek : StatisticsEvent()
-    object LoadNextWeek: StatisticsEvent()
-    object LoadCurrentWeek : StatisticsEvent()
+    data object LoadPreviousWeek : StatisticsEvent()
+    data object LoadNextWeek: StatisticsEvent()
+    data object LoadCurrentWeek : StatisticsEvent()
 }

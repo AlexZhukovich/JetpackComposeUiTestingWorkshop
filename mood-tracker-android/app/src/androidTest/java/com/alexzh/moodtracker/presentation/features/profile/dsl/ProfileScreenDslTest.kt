@@ -9,6 +9,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.navigation.compose.rememberNavController
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.alexzh.moodtracker.data.AuthRepository
@@ -21,7 +22,6 @@ import com.alexzh.moodtracker.di.appModule
 import com.alexzh.moodtracker.di.dataModule
 import com.alexzh.moodtracker.presentation.navigation.AppNavigation
 import com.alexzh.moodtracker.presentation.navigation.Screens
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Before
 import org.junit.Rule
@@ -70,15 +70,15 @@ class ProfileScreenDslTest: KoinTest {
     fun shouldBeDisplayedUsedInformation_WhenUserIsLoggedIn() {
         whenever(userRepository.getUserInfo())
             .thenReturn(flowOf(Result.Error(Unauthorized())))
-            .thenReturn(flowOf(Result.Success(UserInfoModel("alex@alexzh.com", "Alex"))))
-        whenever(authRepository.logIn("alex@alexzh.com", "alex"))
+            .thenReturn(flowOf(Result.Success(UserInfoModel("test-account@alexzh.com", "Test User"))))
+        whenever(authRepository.logIn("test-account@alexzh.com", "test-password"))
             .thenReturn(flowOf(Result.Success(JwtToken(UUID.randomUUID().toString()))))
 
 
         composeTestRule.apply {
             setContent {
                 AppNavigation(
-                    navController = rememberAnimatedNavController(),
+                    navController = rememberNavController(),
                     isBottomBarDisplayed = remember { mutableStateOf(false) },
                     startDestination = Screens.ProfileScreen
                 )
@@ -89,14 +89,14 @@ class ProfileScreenDslTest: KoinTest {
             }
             loginScreen(composeTestRule) {
                 login(
-                    email = "alex@alexzh.com",
-                    password = "alex"
+                    email = "test-account@alexzh.com",
+                    password = "test-password"
                 )
             }
             profileScreen(composeTestRule) {
                 hasUserInfo(
-                    email = "alex@alexzh.com",
-                    name = "Alex"
+                    email = "test-account@alexzh.com",
+                    name = "Test User"
                 )
             }
         }

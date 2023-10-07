@@ -10,7 +10,6 @@ import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import com.alexzh.moodtracker.presentation.navigation.AppNavigation
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import org.junit.Rule
 import org.junit.Test
 
