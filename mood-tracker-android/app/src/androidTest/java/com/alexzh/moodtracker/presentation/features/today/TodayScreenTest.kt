@@ -2,12 +2,16 @@ package com.alexzh.moodtracker.presentation.features.today
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.hasContentDescription
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.platform.app.InstrumentationRegistry
 import com.alexzh.moodtracker.data.EmotionHistoryRepository
 import com.alexzh.moodtracker.data.util.Result
 import com.alexzh.moodtracker.di.appModule
 import com.alexzh.moodtracker.di.dataModule
+import com.alexzh.moodtracker.di.runtimeDatabase
 import com.alexzh.moodtracker.presentation.core.date.DateProvider
 import com.alexzh.moodtracker.presentation.core.date.DateProviderImpl
 import com.alexzh.moodtracker.presentation.feature.today.TodayScreen
@@ -53,8 +57,13 @@ class TodayScreenTest : ScreenshotTest, KoinTest {
         stopKoin()
     }
 
+    /**
+     * Verify that [TodayScreen] displays a success state with a single emotion item.
+     * - the "emotionHistoryRepo" provides a predefined set of fake data
+     * - to verify emotion item we can use the [withEmotionStateAndNote] matcher
+     */
     @Test
-    fun displaySuccessWithSimpleItem_whenDataIsAvailable() {
+    fun displaySuccessWithSingleItem_whenDataIsAvailable() {
         val emotionHistoryRepo: EmotionHistoryRepository = mock {
             on { getEmotionsHistoryByDate(any(), any()) } doReturn
                 flowOf(Result.Success(listOf(EmotionHistoryTestData.EMOTION_HISTORY_ITEM(testDate))))
@@ -78,14 +87,32 @@ class TodayScreenTest : ScreenshotTest, KoinTest {
         // TODO: FINISH TEST CASE
     }
 
+    /**
+     * Verify that [TodayScreen] displays a success state with multiple emotion items.
+     * - the "emotionHistoryRepo" provides a predefined set of fake data
+     * - to verify emotion item we can use the [withEmotionStateAndNote] matcher
+     */
     @Test
     fun displaySuccessWithMultipleItems_whenDataIsAvailable() {
 
     }
 
+    /**
+     * Verify that [TodayScreen] displays a no data is available.
+     * - the "emotionHistoryRepo" provides a predefined set of fake data
+     * - to verify emotion item we can use the [withEmotionStateAndNote] matcher
+     */
     @Test
     fun displayEmptyState_whenDataIsNotAvailable() {
 
+    }
+
+    private fun withEmotionStateAndNote(
+        emotionState: String,
+        note: String
+    ): SemanticsMatcher {
+        return hasText(note)
+            .and(hasContentDescription(emotionState))
     }
 
     @After

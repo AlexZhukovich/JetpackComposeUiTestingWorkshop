@@ -28,6 +28,10 @@ class SettingsScreenParamScreenshotTest : ScreenshotTest {
     @get:Rule
     val composeTestRule = createEmptyComposeRule()
 
+    /**
+     * Create a parameterized test which verifies the [SettingsScreen] for the following cases:
+     * - small, normal, large and huge font sizes (see [FontSize])
+     */
     @Test
     fun settingsScreen_customFontSize(@TestParameter fontSize: FontSize) {
 

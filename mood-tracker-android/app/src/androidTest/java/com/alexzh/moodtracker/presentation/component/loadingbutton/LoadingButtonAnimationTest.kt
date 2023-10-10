@@ -18,6 +18,14 @@ class LoadingButtonAnimationTest : ScreenshotTest {
     @get:Rule
     val composableTestRule = createComposeRule()
 
+    /**
+     * Verify the animation of the [LoadingButton] component with loading state.
+     * Take screenshots at different time points after starting the test:
+     * - 100 ms
+     * - 200 ms
+     * - 300 ms
+     * - 400 ms
+     */
     @Test
     fun loadingButton_loadingAnimation() {
 

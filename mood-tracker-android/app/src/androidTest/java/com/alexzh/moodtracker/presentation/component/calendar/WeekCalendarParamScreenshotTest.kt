@@ -31,6 +31,11 @@ class WeekCalendarParamScreenshotTest : ScreenshotTest {
     @get:Rule
     val composeTestRule = createEmptyComposeRule()
 
+    /**
+     * Create a parameterized test which verifies the [WeekCalendar] for the following cases:
+     * - light and dark mode (see [UiMode])
+     * - the "todayDate" is equal to "selectedDate" and "todayDate" is not equal to "selectedDate"
+     */
     @Test
     fun weekCalendar_paramUiModeAndSelectedDate(
         @TestParameter uiMode: UiMode,

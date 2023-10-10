@@ -14,6 +14,7 @@ import com.alexzh.moodtracker.MoodTrackerDatabase
 import com.alexzh.moodtracker.di.appModule
 import com.alexzh.moodtracker.di.dataModule
 import com.alexzh.moodtracker.di.runtimeDatabase
+import com.alexzh.moodtracker.presentation.feature.today.TodayScreen
 import com.alexzh.moodtracker.presentation.navigation.AppNavigation
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
@@ -34,12 +35,18 @@ class TodayScreenRuntimeDatabaseTest: KoinTest {
     @get:Rule
     val composableTestRule = createComposeRule()
 
+    /**
+     * Verify that [TodayScreen] displays emotion items after adding them on the [AddMoodScreen].
+     * Instead of real environment, we will use the runtime database via [runtimeDatabase] koin module.
+     * - to wait until data we will get data from database, we can use the "waitUntil" method
+     * - to verify emotion item we can use the [withEmotionStateAndNote] matcher
+     */
     @Test
     fun displayEmotion_WhenEmotionHistoryWasAddedViaAddMoodScreen() {
 
     }
 
-    fun withEmotionStateAndNote(
+    private fun withEmotionStateAndNote(
         emotionState: String,
         note: String
     ): SemanticsMatcher {

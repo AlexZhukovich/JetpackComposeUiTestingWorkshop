@@ -19,6 +19,7 @@ import com.alexzh.moodtracker.data.remote.model.UserInfoModel
 import com.alexzh.moodtracker.data.util.Result
 import com.alexzh.moodtracker.di.appModule
 import com.alexzh.moodtracker.di.dataModule
+import com.alexzh.moodtracker.presentation.feature.profile.ProfileScreen
 import com.alexzh.moodtracker.presentation.navigation.AppNavigation
 import com.alexzh.moodtracker.presentation.navigation.Screens
 import kotlinx.coroutines.flow.flowOf
@@ -65,6 +66,10 @@ class ProfileScreenTest: KoinTest {
         }
     }
 
+    /**
+     * Verify that [ProfileScreen] display a user information
+     * when user is logged in.
+     */
     @Test
     fun displayUserInfo_WhenUserIsLoggedIn() {
 

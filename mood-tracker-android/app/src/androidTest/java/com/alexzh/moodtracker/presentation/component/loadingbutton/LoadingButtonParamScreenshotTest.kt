@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.unit.dp
 import com.alexzh.moodtracker.presentation.component.LoadingButton
+import com.alexzh.moodtracker.presentation.component.calendar.WeekCalendar
 import com.alexzh.moodtracker.presentation.theme.AppTheme
 import com.google.testing.junit.testparameterinjector.TestParameter
 import com.google.testing.junit.testparameterinjector.TestParameterInjector
@@ -29,6 +30,11 @@ class LoadingButtonParamScreenshotTest : ScreenshotTest {
     @get:Rule
     val composeTestRule = createEmptyComposeRule()
 
+    /**
+     * Create a parameterized test which verifies the [LoadingButton] for the following cases:
+     * - light and dark mode (see [UiMode])
+     * - loading and not loading states
+     */
     @Test
     fun loadingButton_customUiModeAndLoading(
             @TestParameter uiMode: UiMode,
