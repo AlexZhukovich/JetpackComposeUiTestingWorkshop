@@ -84,7 +84,7 @@ class TodayScreenTest : ScreenshotTest, KoinTest {
             )
         }
 
-        // TODO: FINISH TEST CASE
+        // ...
     }
 
     /**

@@ -72,6 +72,18 @@ class ProfileScreenTest: KoinTest {
      */
     @Test
     fun displayUserInfo_WhenUserIsLoggedIn() {
+        val email = "test@test.com"
+        val password = "test"
+        val username = "Test"
 
+        whenever(userRepository.getUserInfo())
+            .thenReturn(flowOf(Result.Error(Unauthorized())))
+            .thenReturn(flowOf(Result.Success(UserInfoModel(email, username))))
+        whenever(authRepository.logIn(email, password))
+            .thenReturn(flowOf(Result.Success(JwtToken(UUID.randomUUID().toString()))))
+
+        composeTestRule.apply {
+            // ...
+        }
     }
 }
