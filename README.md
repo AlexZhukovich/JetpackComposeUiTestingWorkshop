@@ -6,7 +6,7 @@
 
 ### [Mood Tracker API](/mood-tracker-api)
 
-## Prerequsites
+## Prerequisites
 - Install stable version of Android Studio
 - Install stable version of Intellij IDEA
 - Install [Maestro](https://maestro.mobile.dev/getting-started/installing-maestro)
