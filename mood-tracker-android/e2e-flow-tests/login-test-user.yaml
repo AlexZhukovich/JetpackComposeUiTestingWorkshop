@@ -1,0 +1,16 @@
+appId: com.alexzh.moodtracker
+---
+- launchApp:
+    clearState: true
+- tapOn: "Settings"
+- tapOn:
+      text: "Profile"
+      index: 0
+- tapOn: "Login"
+- tapOn: "Email"
+- inputText: "test@test.test"
+- tapOn: "Password"
+- inputText: "test_123"
+- tapOn: "Login"
+- assertVisible: "test@test.test"
+- assertVisible: "Test"

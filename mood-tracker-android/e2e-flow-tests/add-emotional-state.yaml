@@ -1,0 +1,14 @@
+appId: com.alexzh.moodtracker
+---
+- launchApp:
+    clearState: true
+- tapOn: "Add"
+- tapOn: "Excited"
+- tapOn: "Select a time"
+- tapOn: "9"
+- tapOn: "35"
+- tapOn: "OK"
+- tapOn:
+      point: "39%,35%"
+- tapOn: "Save"
+- assertVisible: "Excited"
