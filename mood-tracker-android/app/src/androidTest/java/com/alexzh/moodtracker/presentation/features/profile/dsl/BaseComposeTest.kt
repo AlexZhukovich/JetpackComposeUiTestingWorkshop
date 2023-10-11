@@ -4,7 +4,6 @@ import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import org.junit.Rule
 
-
 open class BaseComposeTest {
 
     @get:Rule

@@ -91,7 +91,7 @@ class TodayScreenRuntimeDatabaseTest: KoinTest {
         }
     }
 
-    fun withEmotionStateAndNote(
+    private fun withEmotionStateAndNote(
         emotionState: String,
         note: String
     ): SemanticsMatcher {

@@ -10,7 +10,6 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import com.alexzh.moodtracker.presentation.navigation.Screens
 import org.junit.Rule
 
-
 @ExperimentalMaterial3Api
 @ExperimentalComposeUiApi
 @ExperimentalAnimationApi

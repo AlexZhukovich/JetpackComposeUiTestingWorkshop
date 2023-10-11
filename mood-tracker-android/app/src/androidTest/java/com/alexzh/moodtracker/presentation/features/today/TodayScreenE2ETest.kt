@@ -88,7 +88,7 @@ class TodayScreenE2ETest {
         }
     }
 
-    fun withEmotionStateAndNote(
+    private fun withEmotionStateAndNote(
         emotionState: String,
         note: String
     ): SemanticsMatcher {

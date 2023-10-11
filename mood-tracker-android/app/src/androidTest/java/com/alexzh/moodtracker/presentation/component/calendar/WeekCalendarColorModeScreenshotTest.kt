@@ -3,9 +3,7 @@ package com.alexzh.moodtracker.presentation.component.calendar
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
@@ -13,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.unit.dp
 import androidx.test.filters.MediumTest
-import com.alexzh.moodtracker.presentation.component.LoadingButton
 import com.alexzh.moodtracker.presentation.theme.AppTheme
 import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import com.karumi.shot.ScreenshotTest
