@@ -1,0 +1,5 @@
+appId: com.alexzh.moodtracker
+---
+- launchApp:
+    clearState: true
+# Add your changes here
