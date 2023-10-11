@@ -25,6 +25,12 @@ class LoadingButtonParamScreenshotTest : ScreenshotTest {
         LONG("super long super long super long  super long  super long super long super long")
     }
 
+    /**
+     * Create a parameterized test which verifies the [LoadingButton] for the following cases:
+     * - light and dark mode (see [UiMode])
+     * - loading and not loading states
+     * - short and long text
+     */
     @MediumTest
     @Test
     fun loadingButton_customUiModeAndLoading(

@@ -30,9 +30,13 @@ class WeekCalendarColorModeScreenshotTest : ScreenshotTest {
     @get:Rule
     val composeTestRule = createEmptyComposeRule()
 
+    /**
+     * Verify the [WeekCalendar] component for a light mode
+     * when the "todayDate" parameter is equal to "selectedDate" parameter.
+     */
     @MediumTest
     @Test
-    fun weekCalendar_light_todayInSelectedDate() {
+    fun weekCalendar_light_todayDateIsEqualToSelectedDate() {
         val activityScenario = ActivityScenarioConfigurator.ForComposable()
             .setUiMode(UiMode.DAY)
             .launchConfiguredActivity()
@@ -58,14 +62,18 @@ class WeekCalendarColorModeScreenshotTest : ScreenshotTest {
 
         composeTestRule.mainClock.advanceTimeBy(400)
         activityScenario.waitForActivity()
-        compareScreenshot(composeTestRule, "weekCalendar_light_todayInSelectedDate")
+        compareScreenshot(composeTestRule, "weekCalendar_light_todayDateIsEqualToSelectedDate")
 
         activityScenario.close()
     }
 
+    /**
+     * Verify the [WeekCalendar] component for a dark mode
+     * when the "todayDate" parameter is equal to "selectedDate" parameter.
+     */
     @MediumTest
     @Test
-    fun weekCalendar_dark_todayInSelectedDate() {
+    fun weekCalendar_dark_todayDateIsEqualToSelectedDate() {
         val activityScenario = ActivityScenarioConfigurator.ForComposable()
             .setUiMode(UiMode.NIGHT)
             .launchConfiguredActivity()
@@ -91,14 +99,18 @@ class WeekCalendarColorModeScreenshotTest : ScreenshotTest {
 
         composeTestRule.mainClock.advanceTimeBy(400)
         activityScenario.waitForActivity()
-        compareScreenshot(composeTestRule, "weekCalendar_dark_todayInSelectedDate")
+        compareScreenshot(composeTestRule, "weekCalendar_dark_todayDateIsEqualToSelectedDate")
 
         activityScenario.close()
     }
 
+    /**
+     * Verify the [WeekCalendar] component for a light mode
+     * when the "todayDate" parameter is not equal to "selectedDate" parameter.
+     */
     @MediumTest
     @Test
-    fun weekCalendar_light_todayInNotSelectedDate() {
+    fun weekCalendar_light_todayIsNotEqualToSelectedDate() {
         val activityScenario = ActivityScenarioConfigurator.ForComposable()
             .setUiMode(UiMode.DAY)
             .launchConfiguredActivity()
@@ -124,14 +136,18 @@ class WeekCalendarColorModeScreenshotTest : ScreenshotTest {
 
         composeTestRule.mainClock.advanceTimeBy(400)
         activityScenario.waitForActivity()
-        compareScreenshot(composeTestRule, "weekCalendar_light_todayInNotSelectedDate")
+        compareScreenshot(composeTestRule, "weekCalendar_light_todayIsNotEqualToSelectedDate")
 
         activityScenario.close()
     }
 
+    /**
+     * Verify the [WeekCalendar] component for a dark mode
+     * when the "todayDate" parameter is not equal to "selectedDate" parameter.
+     */
     @MediumTest
     @Test
-    fun weekCalendar_dark_todayInNotSelectedDate() {
+    fun weekCalendar_dark_todayDateIsNotEqualToSelectedDate() {
         val activityScenario = ActivityScenarioConfigurator.ForComposable()
             .setUiMode(UiMode.NIGHT)
             .launchConfiguredActivity()
@@ -157,7 +173,7 @@ class WeekCalendarColorModeScreenshotTest : ScreenshotTest {
 
         composeTestRule.mainClock.advanceTimeBy(400)
         activityScenario.waitForActivity()
-        compareScreenshot(composeTestRule, "weekCalendar_dark_todayInNotSelectedDate")
+        compareScreenshot(composeTestRule, "weekCalendar_dark_todayDateIsNotEqualToSelectedDate")
 
         activityScenario.close()
     }

@@ -1,6 +1,7 @@
 package com.alexzh.moodtracker.presentation.features.auth.login
 
 import androidx.activity.ComponentActivity
+import androidx.annotation.StringRes
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -42,6 +43,10 @@ class LoginScreenTest : KoinTest {
         }
     }
 
+    /**
+     * Verify that "The 'Email' should be at least four characters long" error message is displayed
+     * when email is shorter than 4 symbols.
+     */
     @Test
     fun displayEmailIsTooShortError_whenEnteredEmailIsShorterThanFourSymbols() {
         composableTestRule.apply {
@@ -67,6 +72,10 @@ class LoginScreenTest : KoinTest {
         }
     }
 
+    /**
+     * Verify that "The 'Password' should be at least four characters long" error message is displayed
+     * when password is shorter than 4 symbols.
+     */
     @Test
     fun displayPasswordIsTooShortError_whenEnteredPasswordIsShorterThanFourSymbols() {
         composableTestRule.apply {

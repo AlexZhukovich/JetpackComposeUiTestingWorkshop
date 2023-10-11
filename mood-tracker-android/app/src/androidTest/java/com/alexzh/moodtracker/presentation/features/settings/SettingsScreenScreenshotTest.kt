@@ -22,6 +22,9 @@ class SettingsScreenScreenshotTest : ScreenshotTest {
     @get:Rule
     val composeTestRule = createEmptyComposeRule()
 
+    /**
+     * Verify the [SettingsScreen] for a light mode.
+     */
     @MediumTest
     @Test
     fun settingsScreen_defaultState() {
@@ -45,6 +48,9 @@ class SettingsScreenScreenshotTest : ScreenshotTest {
         activityScenario.close()
     }
 
+    /**
+     * Verify the [SettingsScreen] for a dark mode.
+     */
     @MediumTest
     @Test
     fun settingsScreen_dark_defaultState() {

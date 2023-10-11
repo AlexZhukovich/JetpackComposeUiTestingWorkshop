@@ -24,6 +24,10 @@ class SettingsScreenParamScreenshotTest : ScreenshotTest {
     @get:Rule
     val composeTestRule = createEmptyComposeRule()
 
+    /**
+     * Create a parameterized test which verifies the [SettingsScreen] for the following cases:
+     * - light and dark mode (see [UiMode])
+     */
     @MediumTest
     @Test
     fun settingsScreen_customUiMode(
@@ -49,7 +53,10 @@ class SettingsScreenParamScreenshotTest : ScreenshotTest {
         activityScenario.close()
     }
 
-
+    /**
+     * Create a parameterized test which verifies the [SettingsScreen] for the following cases:
+     * - small, normal, large and huge font sizes (see [FontSize])
+     */
     @MediumTest
     @Test
     fun settingsScreen_customFontSize(@TestParameter fontSize: FontSize) {
@@ -73,6 +80,11 @@ class SettingsScreenParamScreenshotTest : ScreenshotTest {
         activityScenario.close()
     }
 
+    /**
+     * Create a parameterized test which verifies the [SettingsScreen] for the following cases:
+     * - small, normal, large and huge font sizes (see [FontSize])
+     * - light and dark mode (see [UiMode])
+     */
     @MediumTest
     @Test
     fun settingsScreen_customFontSize(

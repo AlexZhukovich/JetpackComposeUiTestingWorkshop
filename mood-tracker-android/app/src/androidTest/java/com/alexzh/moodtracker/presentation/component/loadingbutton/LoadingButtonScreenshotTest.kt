@@ -15,6 +15,10 @@ class LoadingButtonScreenshotTest : ScreenshotTest {
     @get:Rule
     val composableTestRule = createComposeRule()
 
+    /**
+     * Verify the [LoadingButton] with a default state
+     * - The "isLoading" property is equal to "false"
+     */
     @MediumTest
     @Test
     fun loadingButton_defaultState() {
@@ -31,6 +35,10 @@ class LoadingButtonScreenshotTest : ScreenshotTest {
         }
     }
 
+    /**
+     * Verify the [LoadingButton] with a loading state
+     * - The "isLoading" property is equal to "true"
+     */
     @MediumTest
     @Test
     fun loadingButton_loadingState() {

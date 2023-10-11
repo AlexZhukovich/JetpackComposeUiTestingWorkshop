@@ -19,6 +19,8 @@ import com.alexzh.moodtracker.data.remote.model.UserInfoModel
 import com.alexzh.moodtracker.data.util.Result
 import com.alexzh.moodtracker.di.appModule
 import com.alexzh.moodtracker.di.dataModule
+import com.alexzh.moodtracker.presentation.feature.auth.login.LoginScreen
+import com.alexzh.moodtracker.presentation.feature.profile.ProfileScreen
 import com.alexzh.moodtracker.presentation.navigation.AppNavigation
 import com.alexzh.moodtracker.presentation.navigation.Screens
 import kotlinx.coroutines.flow.flowOf
@@ -60,6 +62,17 @@ class ProfileScreenDslTest: BaseComposeTest() {
         }
     }
 
+    /**
+     * Verify that [ProfileScreen] allows to login into the application when user is not logged in.
+     * When the user is logged in the personal information is displayed.
+     *
+     * The DSL should be created with the "Robot" pattern.
+     *
+     * Flow for this test case:
+     * - [ProfileScreen]: user is not logged in (default state)
+     * - [LoginScreen]: enter credentials and login to the app
+     * - [ProfileScreen]: user and logged in and user information is displayed
+     */
     @Test
     fun shouldBeDisplayedUsedInformation_WhenUserIsLoggedIn() {
         whenever(userRepository.getUserInfo())

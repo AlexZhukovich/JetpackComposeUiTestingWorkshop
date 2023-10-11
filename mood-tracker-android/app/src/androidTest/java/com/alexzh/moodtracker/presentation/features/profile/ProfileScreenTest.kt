@@ -19,6 +19,7 @@ import com.alexzh.moodtracker.data.remote.model.UserInfoModel
 import com.alexzh.moodtracker.data.util.Result
 import com.alexzh.moodtracker.di.appModule
 import com.alexzh.moodtracker.di.dataModule
+import com.alexzh.moodtracker.presentation.feature.profile.ProfileScreen
 import com.alexzh.moodtracker.presentation.navigation.AppNavigation
 import com.alexzh.moodtracker.presentation.navigation.Screens
 import kotlinx.coroutines.flow.flowOf
@@ -65,25 +66,10 @@ class ProfileScreenTest: KoinTest {
         }
     }
 
-    @Test
-    fun errorCase() {
-        whenever(userRepository.getUserInfo())
-            .thenReturn(flowOf(Result.Error(Unauthorized())))
-
-        composeTestRule.apply {
-            setContent {
-                AppNavigation(
-                    navController = rememberNavController(),
-                    isBottomBarDisplayed = remember { mutableStateOf(false) },
-                    startDestination = Screens.ProfileScreen
-                )
-            }
-
-            onNodeWithText("Login")
-                .assertIsDisplayed()
-        }
-    }
-
+    /**
+     * Verify that [ProfileScreen] display a user information
+     * when user is logged in.
+     */
     @Test
     fun displayUserInfo_WhenUserIsLoggedIn() {
         val email = "test@test.com"

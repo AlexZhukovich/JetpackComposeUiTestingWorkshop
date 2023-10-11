@@ -51,8 +51,12 @@ class TodayScreenTest : ScreenshotTest, KoinTest {
         stopKoin()
     }
 
+    /**
+     * Verify that [TodayScreen] displays a success state with a single emotion item.
+     * - the "emotionHistoryRepo" provides a predefined set of fake data
+     */
     @Test
-    fun displaySuccessWithSimpleItem_whenDataIsAvailable() {
+    fun displaySuccessWithSingleItem_whenDataIsAvailable() {
         val emotionHistoryRepo: EmotionHistoryRepository = mock {
             on { getEmotionsHistoryByDate(any(), any()) } doReturn
                 flowOf(Result.Success(listOf(EmotionHistoryTestData.EMOTION_HISTORY_ITEM(testDate))))
@@ -87,6 +91,10 @@ class TodayScreenTest : ScreenshotTest, KoinTest {
         }
     }
 
+    /**
+     * Verify that [TodayScreen] displays a no data is available.
+     * - the "emotionHistoryRepo" provides a predefined set of fake data
+     */
     @Test
     fun displaySuccessWithMultipleItems_whenDataIsAvailable() {
         val emotionHistoryRepo: EmotionHistoryRepository = mock {

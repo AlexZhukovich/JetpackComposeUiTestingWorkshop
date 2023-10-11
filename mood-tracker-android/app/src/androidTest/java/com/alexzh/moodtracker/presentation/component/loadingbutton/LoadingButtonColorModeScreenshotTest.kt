@@ -28,6 +28,13 @@ class LoadingButtonColorModeScreenshotTest : ScreenshotTest {
     @get:Rule
     val composeTestRule = createEmptyComposeRule()
 
+    /**
+     * Verify the [LoadingButton] for a light mode with default state
+     * - The "isLoading" property is equal to "false"
+     *
+     * Note:
+     * - The "Modifier.background" property is show the difference between light and dark mode
+     */
     @MediumTest
     @Test
     fun loadingButtonLight_light_defaultState() {
@@ -58,6 +65,10 @@ class LoadingButtonColorModeScreenshotTest : ScreenshotTest {
         activityScenario.close()
     }
 
+    /**
+     * Verify the [LoadingButton] for a dark mode with default state
+     * - The "isLoading" property is equal to "false"
+     */
     @MediumTest
     @Test
     fun loadingButtonLight_dark_defaultState() {
@@ -88,6 +99,10 @@ class LoadingButtonColorModeScreenshotTest : ScreenshotTest {
         activityScenario.close()
     }
 
+    /**
+     * Verify the [LoadingButton] for a light mode with default state
+     * - The "isLoading" property is equal to "true"
+     */
     @MediumTest
     @Test
     fun loadingButtonLight_light_loadingState() {
@@ -121,6 +136,10 @@ class LoadingButtonColorModeScreenshotTest : ScreenshotTest {
         activityScenario.close()
     }
 
+    /**
+     * Verify the [LoadingButton] for a dark mode with default state
+     * - The "isLoading" property is equal to "true"
+     */
     @MediumTest
     @Test
     fun loadingButtonLight_dark_loadingState() {
